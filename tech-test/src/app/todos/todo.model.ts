@@ -9,3 +9,8 @@ export class Todo {
       Object.assign(this, values);
     }
 }
+
+export class Signin {
+  token: string;
+  name: string;
+}

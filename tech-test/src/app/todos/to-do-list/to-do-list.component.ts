@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {TodoService} from '../services/todo.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 import {Todo} from '../todo.model';
 
@@ -14,7 +15,12 @@ export class ToDoListComponent implements OnInit {
   toDoList:Todo[] = [];
   tdModel: Todo = new Todo();
 
-  constructor(private todoService : TodoService, private route: ActivatedRoute) { }
+  constructor(
+     private todoService : TodoService,
+     private route: ActivatedRoute,
+     private auth: AuthService,
+     private router: Router
+     ) { }
 
   ngOnInit() {
    this.getTodos();

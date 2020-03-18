@@ -1,20 +1,30 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { CanActivateTodosGuard } from './can-activate-todos.guard';
 import { ToDoListComponent} from './to-do-list/to-do-list.component';
 import {TodosResolver} from './todos.resolver'
 import { TodosModule } from './todos.module';
+import { SignInComponent } from './sign-in/sign-in.component';
 
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'todos',
-   pathMatch: 'full'
+    redirectTo: 'sign-in',
+    pathMatch: 'full'
+  },
+
+  {
+    path: 'sign-in',
+    component: SignInComponent
   },
 
   {
   path: 'todos',
   component: ToDoListComponent,
+  canActivate: [
+    CanActivateTodosGuard
+  ],
   resolve: {
     todos: TodosResolver
   }
@@ -29,6 +39,6 @@ const routes: Routes = [
 @NgModule({
   imports: [ RouterModule.forChild(routes) ],
   exports: [ RouterModule ],
-  providers: [ TodosResolver ]
+  providers: [ TodosResolver, CanActivateTodosGuard ]
 })
 export class TodosRoutingModule { }
