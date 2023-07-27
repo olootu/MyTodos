@@ -1,13 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-//import { Http, Headers, RequestOptions, Response } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { v4 as uuidv4 } from 'uuid';
-
 import { environment } from '../../../environments/environment';
-
-import {Todo, Signin} from '../todo.model';
-import {SessionService} from './session.service'
-
+import { Todo, Signin } from '../todo.model';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError, map } from 'rxjs/operators';
 
@@ -18,18 +13,12 @@ const fakeBaseUrl = environment.fakeBaseUrl;
   providedIn: 'root'
 })
 export class TodoService {
-  
-  constructor(private http: HttpClient, private session: SessionService) { }
 
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json'
-    })
-  }
+  constructor(private http: HttpClient) { }
 
-  signIn(username: string, password: string){
+  signIn(username: string, password: string): Observable<Signin> {
     return this.http
-      .post(fakeBaseUrl + '/sign-in', {
+      .post<Signin>(`${fakeBaseUrl}/sign-in`, {
         username,
         password
       })
@@ -38,36 +27,31 @@ export class TodoService {
       )
   }
 
-  // GET all Todos
   getTodos(): Observable<Todo[]> {
-    const options = this.getRequestOptions();
-    return this.http.get<Todo[]>(fakeBaseUrl + '/tasks/', {headers: options})
-    .pipe(
-      retry(1),
-      catchError(this.handleError)
-    )
+    return this.http.get<Todo[]>(`${fakeBaseUrl}/tasks/`)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      )
   }
 
-  // Cfreate a new Todo
   createTodo(todo: Todo) {
     if (!todo.id) {
       todo.id = uuidv4();
     }
-    const options = this.getRequestOptions();
     return this.http
-    .post(fakeBaseUrl + '/tasks/', todo, {headers: options})
-    .pipe(
-      map(response => {
-        return new Todo(response);
-      }),
-      catchError(this.handleError)
-    )
+      .post(`${fakeBaseUrl}/tasks/`, todo)
+      .pipe(
+        map(response => {
+          return new Todo(response);
+        }),
+        catchError(this.handleError)
+      )
   }
 
   updateTodo(todo: Todo): Observable<Todo> {
-    const options = this.getRequestOptions();
     return this.http
-      .put(fakeBaseUrl + '/tasks/' + todo.id, todo, {headers: options})
+      .put(`${fakeBaseUrl}/tasks/${todo.id}`, todo)
       .pipe(
         map(response => {
           return new Todo(response);
@@ -77,30 +61,21 @@ export class TodoService {
   }
 
   deleteTodoById(todoId: number): Observable<null> {
-    const options = this.getRequestOptions();
     return this.http
-    .delete(fakeBaseUrl + '/tasks/' + todoId, {headers: options})
-    .pipe(
-      map(response => null),
-      catchError(this.handleError)
-    )
+      .delete(`${fakeBaseUrl}/tasks/${todoId}`)
+      .pipe(
+        map(response => null),
+        catchError(this.handleError)
+      )
   }
 
-   // Error handling
   handleError(error) {
     let errorMessage = '';
-    if(error.error instanceof ErrorEvent) {
+    if (error.error instanceof ErrorEvent) {
       errorMessage = error.error.message;
     } else {
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
     return throwError(errorMessage);
- }
-
- private getRequestOptions() {
-  // const headers = new Headers({
-  //   'Authorization': 'Bearer ' + this.session.accessToken
-  // });
-  return new HttpHeaders().set('Authorization', `Bearer ${this.session.accessToken}`);
-}
+  }
 }

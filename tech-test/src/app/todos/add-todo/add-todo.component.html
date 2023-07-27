@@ -1,32 +1,30 @@
 <header class="header" *ngIf="tdModel">
-    <h2>Add Todo Items</h2>
-    <p class="form-error pl-1 text-danger" *ngIf="formError">Please fill-in fields with -></p>
-    <div>
-      <form class="form-inline" #todoForm="ngForm" (ngSubmit)="addTodo(todoForm, tdModel)" novalidate>
-        <div class="form-group">
-          <input required type="text" class="form-control" [(ngModel)]="tdModel.label" 
-          name="label" id="labelnput"
-            placeholder="What to do">
-        </div>
-        <div class="form-group">
-          <input type="text" class="form-control" [(ngModel)]="tdModel.description" 
-          required name="description" id="description" placeholder="Description">
-        </div>
-        <div class="form-group">
-          <select class="form-control"  id="category"
-            [(ngModel)]="tdModel.category" name="category">
-            <option [value]="''" >Select Category</option>
-            <option *ngFor="let cat of catOptions" [value]="cat">{{cat}}</option>
-          </select>
-        </div>
-        <div class="form-group form-check">
-            <label class="form-check-label" for="doneCheck">
-                Mark as done &nbsp; &nbsp;&nbsp;
-              </label>
-          <input type="checkbox" class="form-check-input" [(ngModel)]="tdModel.done" name="done" id="doneCheck">
-          
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
-    </div>
-  </header>
+  <h2>Add Todo Items</h2>
+  <p class="form-error pl-1 text-danger" *ngIf="formError">Please fill-in all required fields</p>
+  <div class="form-holder">
+    <form class="form-inline" #todoForm="ngForm" (ngSubmit)="addTodo(todoForm, tdModel)" novalidate>
+      <div class="form-group">
+        <input required type="text" class="form-control" [(ngModel)]="tdModel.label" name="label" id="labelnput"
+          placeholder="What to do">
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" [(ngModel)]="tdModel.description" required name="description"
+          id="description" placeholder="Description">
+      </div>
+      <div class="form-group">
+        <select aria-label="category" class="form-control" id="category" [(ngModel)]="tdModel.category" name="category">
+          <option [value]="''">Select Category</option>
+          <option *ngFor="let cat of catOptions" [value]="cat">{{cat}}</option>
+        </select>
+      </div>
+      <div class="form-group form-check">
+        <label class="form-check-label" for="doneCheck">
+          Mark as done &nbsp; &nbsp;&nbsp;
+        </label>
+        <input type="checkbox" class="form-check-input" [(ngModel)]="tdModel.done" name="done" id="doneCheck">
+
+      </div>
+      <button type="submit" class="btn btn-primary add-todo">Submit</button>
+    </form>
+  </div>
+</header>

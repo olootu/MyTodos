@@ -1,5 +1,8 @@
 <div class="container">
-    <h1 class="title-text">welcome to angular 8 Origin technical test: {{title}}</h1>
+    <div class="d-flex pt-4 justify-content-between">
+        <h1 class="title-text">My {{title}}</h1>
+        <button *ngIf="authServ.getToken()" (click)="logOut()" class="btn btn-sm btn-danger logout">Logout</button>
+    </div>
 
     <router-outlet></router-outlet>
 </div>

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoService } from '../services/todo.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -17,19 +17,18 @@ export class SignInComponent implements OnInit {
   showInputErrors = false
 
   constructor(
-    private api: TodoService,
-    private auth: AuthService,
+    private todoService: TodoService,
+    private authService: AuthService,
     private fb: FormBuilder,
     private router: Router
-
-  ) { 
+  ) {
     this.frm = fb.group({
-       username: ['', Validators.required],
-       password: ['', Validators.required]
+      username: ['', Validators.required],
+      password: ['', Validators.required]
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   public doSignIn() {
     // Make sure form values are valid
@@ -47,14 +46,10 @@ export class SignInComponent implements OnInit {
     const password = this.frm.get('password').value;
 
     // Submit request to API
-    this.api
-      .signIn(username, password)
+    this.todoService.signIn(username, password)
       .subscribe(
         (response) => {
-          this.auth.doSignIn(
-            response['token'],
-            response['name']
-          );
+          this.authService.setToken(response.name, response.token);
           this.router.navigate(['todos']);
         },
         (error) => {
@@ -62,7 +57,5 @@ export class SignInComponent implements OnInit {
           this.hasFailed = true;
         }
       );
-
   }
-
 }

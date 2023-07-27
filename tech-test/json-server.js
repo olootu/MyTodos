@@ -4,7 +4,7 @@ const router = jsonServer.router('server/database.json');
 const middlewares = jsonServer.defaults();
 const bodyParser = require('body-parser');
 
-// Sample JWT token for demo purposes
+// JWT token for demo purposes
 const jwtToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiU2l0ZVBvaW50IFJ' +
   'lYWRlciJ9.sS4aPcmnYfm3PQlTtH14az9CGjWkjnsDyG_1ats4yYg';
 
@@ -20,7 +20,7 @@ server.post('/sign-in', (req, res) => {
   const password = req.body.password;
   if(username === 'todos' && password === 'todos') {
     res.json({
-      name: 'Todo User',
+      name: 'todo_User',
       token: jwtToken
     });
   }

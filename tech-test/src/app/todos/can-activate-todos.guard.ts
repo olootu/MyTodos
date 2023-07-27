@@ -16,7 +16,7 @@ export class CanActivateTodosGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
-    if (!this.auth.isSignedIn()) {
+    if (!this.auth.getToken()) {
       this.router.navigate(['/sign-in']);
       return false;
     }

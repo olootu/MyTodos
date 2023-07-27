@@ -11,11 +11,22 @@
     }
 
     .ng-invalid:not(form)  {
-        border-left: 6px solid red;
+        border-left: 3px solid #dc3545;
     }
 
     .form-error{
         width: 25%;
-        border-right: 6px solid red;
+        border-right: 3px solid #dc3545;
     }
+
+    .form-holder {
+        position: relative;
+
+        .add-todo {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+        }
+    }
+    
 }

@@ -1,15 +1,7 @@
 <section class="todoapp" *ngIf="toDoList">
-    <app-add-todo 
-      (addTodos)="addTodo($event)" 
-      [tdModel]="tdModel">
-    </app-add-todo>
-    <app-todo-items 
-      (removeItems)="removeTodo($event)"
-      (updateTodo)="upDateTodo($event)"
-      (check)="isChecked($event)"
-      [todoList]="toDoList">
-    </app-todo-items>
-    <footer class="footer" *ngIf="toDoList?.length > 0">
-      <span class="todo-count"><strong>{{toDoList?.length}}</strong> {{toDoList?.length == 1 ? 'item' : 'items'}} left</span>
-    </footer>
-  </section>
+  <app-add-todo (addTodos)="addTodo($event)" [tdModel]="tdModel">
+  </app-add-todo>
+  <app-todo-items (removeItems)="removeTodo($event)" (updateTodo)="upDateTodo($event)" (check)="isChecked($event)"
+    [todoList]="toDoList" [completedItems]="completedItems">
+  </app-todo-items>
+</section>

@@ -1,28 +1,23 @@
 import { Injectable } from '@angular/core';
-import { SessionService } from './session.service'; 
-import {Signin} from '../todo.model'
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private session: SessionService) { }
-
-  public isSignedIn() {
-    return !!this.session.accessToken;
+  isSignedIn() {
+    return !!localStorage.getItem('todo_User')
   }
 
-  public doSignOut() {
-    this.session.destroy();
+  doSignOut() {
+    localStorage.removeItem('todo_User');
   }
 
-  public doSignIn(accessToken: string, name: string) {
-    if ((!accessToken) || (!name)) {
-      return;
-    }
-    this.session.accessToken = accessToken;
-    this.session.name = name;
+  getToken() {
+    return localStorage.getItem('todo_User');
+  }
+
+  setToken(name: string, accessToken: string) {
+    localStorage.setItem(name, accessToken)
   }
 }

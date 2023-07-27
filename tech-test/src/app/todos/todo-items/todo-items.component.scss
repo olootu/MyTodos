@@ -1,9 +1,10 @@
 .main {
+    margin-top: 20px;
     position: relative;
     .view {
         padding: 0.5em 1em;
         margin: 0.5em;
-        border: 1px dotted #666;
+        background: #f5f5f5;
     }
     
     .done {
@@ -21,10 +22,31 @@
     
     
     .search-text {
-        width: 30%;
-        margin: 1em;
-        position: absolute;
-        right: 0;
-        top: -55px;
+        width: 230px;
+        position: relative;
     }
+
+   
+}
+.search {
+    display: flex;
+    justify-content: space-between;
+    margin-right: 8px;
+}
+
+.category {
+    text-align: center;
+}
+
+.update, .destroy {
+    width: 50%;
+    border: 1px dotted #ccc;
+    margin-right: 10px;
+}
+.destroy {
+    margin-right: initial;
+}
+
+.checked {
+    width: 30% !important;
 }

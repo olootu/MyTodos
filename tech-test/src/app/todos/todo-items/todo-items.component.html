@@ -1,20 +1,31 @@
 <section class="main" *ngIf="todoList?.length > 0">
-  <div class="form-group">
-    <input class="form-control  search-text" [(ngModel)]="searchText" placeholder="search for todo by name">
+  <div class="form-group search">
+    <div class="completed">
+
+
+      <span class="todo-count">
+        <strong>{{todoList?.length - completedItems?.length}}</strong> undone
+        {{todoList?.length - completedItems?.length <= 1 ? 'item' : 'items' }} left</span>
+    </div>
+    <input aria-label="search" class="form-control search  search-text" [(ngModel)]="searchText"
+      placeholder="search for todo by name">
   </div>
-    <div class="d-md-flex d-none d-md-block d-xl-block">
-      <label class="flex-label" >Mark as done</label>
-      <label class="flex-label" >Name</label>
-      <label class="flex-label" >Desc</label>
-      <label class="flex-label" >Category</label>
-    </div>
-    
-    <div *ngFor="let todo of todoList | todosearch: searchText" class="view d-md-flex">
-      <input class="toggle  flex-even" type="checkbox" (change)="isChecked(todo)" [checked]="todo.done">
-      <input class="form-control flex-even" [disabled]="todo.done" [(ngModel)]="todo.label" [value]="todo.label">
-      <input class="form-control flex-even" [disabled]="todo.done" [(ngModel)]="todo.description" [value]="todo.description">
-      <label class="flex-even" [class.done]="todo.done">{{todo?.category ? todo?.category : 'None'}}</label>
-      <button class="btn update flex-even" (click)="upDateTodo(todo)"><b>update</b></button>
-      <button class="btn btn-danger destroy flex-even" (click)="removeTodo(todo)">delete</button>
-    </div>
-  </section>
+  <div class="d-md-flex d-none d-md-block d-xl-block">
+    <label class="flex-label">Mark as done</label>
+    <label class="flex-label">Name</label>
+    <label class="flex-label">Desc</label>
+    <label class="flex-label">Category</label>
+  </div>
+
+  <div *ngFor="let todo of todoList | todosearch: searchText" class="view d-md-flex">
+    <input aria-label="todo" class="toggle checked  flex-even" type="checkbox" (change)="isChecked(todo)"
+      [checked]="todo.done">
+    <input aria-label="label" class="form-control flex-even" [ngClass]="{'done': todo.done}" [disabled]="todo.done"
+      [(ngModel)]="todo.label" [value]="todo.label">
+    <input aria-label="category" class="form-control flex-even" [ngClass]="{'done': todo.done}" [disabled]="todo.done"
+      [(ngModel)]="todo.description" [value]="todo.description">
+    <label class="flex-even category" [class.done]="todo.done">{{todo?.category ? todo?.category : 'None'}}</label>
+    <button class="btn update" (click)="upDateTodo(todo)"><b>update</b></button>
+    <button class="btn btn-danger destroy" (click)="removeTodo(todo)">delete</button>
+  </div>
+</section>

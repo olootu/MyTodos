@@ -3,8 +3,9 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TodosModule } from './todos/todos.module';
+import { TokenInterceptorService } from './todos/services/token-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,13 @@ import { TodosModule } from './todos/todos.module';
     HttpClientModule,
     TodosModule
   ],
-  providers: [HttpClient],
+  providers: [HttpClient,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
