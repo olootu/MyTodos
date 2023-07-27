@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoService } from '../services/todo.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
@@ -11,7 +11,7 @@ import { AuthService } from '../services/auth.service';
 })
 export class SignInComponent implements OnInit {
 
-  frm: FormGroup;
+  frm: UntypedFormGroup;
   isBusy = false;
   hasFailed = false;
   showInputErrors = false
@@ -19,7 +19,7 @@ export class SignInComponent implements OnInit {
   constructor(
     private todoService: TodoService,
     private authService: AuthService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private router: Router
   ) {
     this.frm = fb.group({
