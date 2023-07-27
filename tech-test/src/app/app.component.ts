@@ -12,7 +12,7 @@ export class AppComponent {
   isSignedIn: boolean = true;
 
   constructor(
-    private authServ: AuthService,
+    public authServ: AuthService,
     private router: Router
   ) { }
 

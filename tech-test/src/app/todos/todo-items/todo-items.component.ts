@@ -12,6 +12,7 @@ export class TodoItemsComponent {
   @Input() completedItems = []
   @Output() removeItems = new EventEmitter();
   @Output() updateTodo = new EventEmitter();
+  searchText;
 
   constructor() { }
 
