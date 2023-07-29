@@ -38,15 +38,27 @@
     text-align: center;
 }
 
-.update, .destroy {
+.update {
     width: 50%;
-    border: 1px dotted #ccc;
     margin-right: 10px;
 }
+
 .destroy {
     margin-right: initial;
 }
 
 .checked {
     width: 30% !important;
+}
+
+.dlt-icon {
+    color: #dc3545;
+    &:hover {
+        color: initial;
+    }
+}
+
+.update_btn {
+    border: 1px dotted #ccc;
+    padding: 6px;
 }

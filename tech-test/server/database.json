@@ -4,7 +4,7 @@
       "label": "Ironings",
       "description": "Get ironing done",
       "category": "Household",
-      "done": true,
+      "done": false,
       "id": "88b5b20a-45fa-4535-897d-9bfce47e5102"
     },
     {

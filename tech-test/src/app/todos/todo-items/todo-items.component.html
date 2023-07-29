@@ -25,7 +25,10 @@
     <input aria-label="category" class="form-control flex-even" [ngClass]="{'done': todo.done}" [disabled]="todo.done"
       [(ngModel)]="todo.description" [value]="todo.description">
     <label class="flex-even category" [class.done]="todo.done">{{todo?.category ? todo?.category : 'None'}}</label>
-    <button class="btn update" (click)="upDateTodo(todo)"><b>update</b></button>
-    <button class="btn btn-danger destroy" (click)="removeTodo(todo)">delete</button>
+    <button aria-label="update" title="Update" class="btn update" (click)="upDateTodo(todo)"> <i
+        class="bi bi-arrow-clockwise update_btn"></i></button>
+    <button aria-label="delete button" class="btn destroy" (click)="removeTodo(todo)">
+      <i title="Delete" class="bi bi-trash dlt-icon"></i>
+    </button>
   </div>
 </section>
