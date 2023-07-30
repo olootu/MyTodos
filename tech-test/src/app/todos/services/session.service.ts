@@ -11,8 +11,10 @@ export class SessionService {
   constructor() {
   }
 
+
   public destroy(): void {
     this.accessToken = null;
+
     this.name = null;
   }
 }
