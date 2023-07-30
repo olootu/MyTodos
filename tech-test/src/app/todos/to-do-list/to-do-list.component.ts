@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
 import { Todo } from '../todo.model';
+import { NotificationService } from '../services/notification.service';
 
 @Component({
   selector: 'app-to-do-list',
@@ -18,6 +19,7 @@ export class ToDoListComponent implements OnInit {
 
   constructor(
     private todoService: TodoService,
+    private notificationService: NotificationService,
     private route: ActivatedRoute,
     private auth: AuthService,
     private router: Router
@@ -41,6 +43,7 @@ export class ToDoListComponent implements OnInit {
       .subscribe(res => {
         this.getTodos();
         this.tdModel = new Todo();
+        this.notificationService.notify('created', 'Successfully');
       })
   }
 
@@ -48,6 +51,7 @@ export class ToDoListComponent implements OnInit {
     this.todoService.updateTodo(todo)
       .subscribe(res => {
         this.getTodos();
+        this.notificationService.notify('updated', 'Successfully');
       })
   }
 
@@ -64,6 +68,7 @@ export class ToDoListComponent implements OnInit {
     this.todoService.deleteTodoById(todo.id)
       .subscribe(a => {
         this.getTodos();
+        this.notificationService.notify('deleted', 'Successfully');
       });
   }
 }

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { TodosRoutingModule } from './todos-routing.module';
 import { ToDoListComponent } from './to-do-list/to-do-list.component';
@@ -11,6 +11,7 @@ import { TodoItemsComponent } from './todo-items/todo-items.component';
 import { SessionService } from './services/session.service';
 import { AuthService } from './services/auth.service';
 import { SignInComponent } from './sign-in/sign-in.component';
+import { SharedModule } from 'src/shared/shared.module';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { SignInComponent } from './sign-in/sign-in.component';
     CommonModule,
     TodosRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ],
   providers: [TodoService, SessionService, AuthService],
 })
