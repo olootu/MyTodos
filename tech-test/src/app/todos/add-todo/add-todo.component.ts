@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Todo } from '../todo.model';
 
 @Component({
@@ -6,23 +6,19 @@ import { Todo } from '../todo.model';
   templateUrl: './add-todo.component.html',
   styleUrls: ['./add-todo.component.scss']
 })
-export class AddTodoComponent implements OnInit {
-@Input() tdModel: Todo;
+export class AddTodoComponent {
+  @Input() tdModel: Todo;
 
-@Output()  addTodos = new EventEmitter()
-  constructor() { }
+  @Output() addTodos = new EventEmitter()
 
   formError: boolean = false;
 
-  catOptions =[
+  catOptions = [
     'Office', 'Household', 'General', 'Sport'
   ]
 
-  ngOnInit() {
-  }
-
   addTodo(form, model) {
-    if (form.invalid){
+    if (form.invalid) {
       this.formError = true;
       return
     }

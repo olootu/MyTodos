@@ -2,11 +2,13 @@
 
 import { TestBed, async, inject } from '@angular/core/testing';
 import { NotificationService } from './notification.service';
+import { SharedModule } from 'src/shared/shared.module';
 
 describe('Service: Notification', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [NotificationService]
+      providers: [NotificationService],
+      imports: [SharedModule]
     });
   });
 

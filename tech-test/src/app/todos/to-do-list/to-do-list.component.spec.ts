@@ -7,7 +7,9 @@ import { TodoItemsComponent } from '../todo-items/todo-items.component';
 import { TodosearchPipe } from '../todosearch.pipe';
 import { HttpClientModule } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, of } from 'rxjs';
+import { of } from 'rxjs';
+import { NotificationService } from '../services/notification.service';
+import { SharedModule } from 'src/shared/shared.module';
 
 describe('ToDoListComponent', () => {
   let component: ToDoListComponent;
@@ -15,11 +17,11 @@ describe('ToDoListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ToDoListComponent, AddTodoComponent, TodoItemsComponent, TodosearchPipe ],
-      imports: [FormsModule, HttpClientModule],
+      declarations: [ToDoListComponent, AddTodoComponent, TodoItemsComponent, TodosearchPipe],
+      imports: [FormsModule, HttpClientModule, SharedModule, HttpClientModule],
       providers: [
         {
-          provide: ActivatedRoute,
+          provide: ActivatedRoute, NotificationService,
           useValue: {
             data: of({
               todos: []
@@ -27,9 +29,9 @@ describe('ToDoListComponent', () => {
           }
         }
       ]
-      
+
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
